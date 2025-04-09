@@ -1,0 +1,118 @@
+/ Ejemplostruct.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+#include <string>
+#define MAX 100
+using namespace std;
+
+struct t_empleados
+{
+	int id;
+	string nombre, fechanac;
+	float sb, sn;
+};
+
+t_empleados empleados;
+
+//Prototipos
+void cargarvector(t_empleados v[], int n);
+void clasificarburbuja(t_empleados v[], int n);
+bool busquedacodigo(t_empleados v[], int n, int clave, int &z);
+void listarplanilla(t_empleados v[], int n);
+float salarioneto(float sb);
+float promedio(t_empleados v[], int n);
+
+// El cuerpo principal
+void main()
+{
+	// declaraciones de todas las variables que se usan
+	t_empleados empleados[MAX];
+
+
+
+	// Menú
+	int opcion, N, codigo, pos; 
+	bool bandera;
+	do {
+
+		// Se muestran las opciones del menú
+		cout << "----Menu---- ";
+		cout << "1. Cargar vector" << endl;
+		cout << "2. Clasificar burbuja" << endl;
+		cout << "3. Busqueda de codigo " << endl;
+		cout << "4. Listar planilla" << endl;
+		cout << "5. Salario neto" << endl;
+		cout << "6. Promedio" << endl;
+		cout << "0. Salir" << endl;
+
+		cout << "Seleccionar una opcion: " << endl;
+			cin >> opcion;
+		// determina de acuerdo a la opcion que debe ejecutarse
+		switch (opcion)
+		{
+		case 1:
+			do{
+				cout << "Introducir el numero de empleados: " << endl;
+				cin >> N;
+			} while (N > MAX || N<=0);
+			cargarvector(empleados, N);
+			break;
+		case 2:
+			clasificarburbuja(empleados, N);
+				break;
+		case 3:
+			cout << "Ingreso el codigo a buscar";
+			cin >> codigo;
+			bandera = busquedacodigo(empleados, N, codigo, pos);
+			if (bandera) {
+				cout << "Codigo: " << empleados[pos].id;
+				cout << "Nombre: " << empleados[pos].nombre;
+				cout << "Fecha Nacimiento: " << empleados[pos].fechanac;
+				cout << "SalarioBruto: " << empleados[pos].sb;
+			}
+			else
+				cout << " No existe el codigo del empleado" << endl;
+			break;
+		case 4:
+			// Listar planilla
+			cout << "\t Planilla de Sueldos\n";
+			cout << "======================\n\n";
+			cout << "Cod  Nombre" << endl; 
+			cout << "===========" << endl;
+			listarplanilla(empleados, N);
+
+			cout << "Promedio: " << promedio(empleados,N); 
+		case 5:
+			cout << "Introducir el codigo del empleado: " << endl; 
+			cin >> codigo; 
+			bandera = busquedacodigo(empleados, N, codigo, pos); 
+			if (bandera)
+				salarioneto(empleados[pos].sb); 
+			else
+				cout << "No existe el empleado" << endl;
+			break;
+		case 6:
+			cout << "El promedio total de la planilla es: " << endl; 
+			cout << promedio(empleados, N);
+			break;
+		case 0:
+			cout << "Salir" << endl;
+			break;
+		default:
+			cout << "Error" << endl; 
+		}
+	} while (opcion != 0);
+
+}
+
+
+float promedio(t_empleados v[], int n) {
+	float suma = 0;
+	for (int i = 0; i < n; i++) {
+		suma += v[i].sn;  // sn = salario neto
+	}
+	if (n == 0)
+		return 0;
+	return suma / n;
+}
