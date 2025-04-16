@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\UPSALAB\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(8,1): warning C4005: 'MAX': redefinición de macro
+C:\Users\UPSALAB\source\repos\ConsoleApplication1\ConsoleApplication1\Fila.h(4,1): message : vea la definición anterior de 'MAX'
+  ConsoleApplication1.vcxproj -> C:\Users\UPSALAB\source\repos\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
